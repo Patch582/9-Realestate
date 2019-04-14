@@ -1,3 +1,4 @@
+import csv
 import os
 
 
@@ -18,16 +19,34 @@ def print_header():
     print()
 
 
-def load_file(file_name):
-    return []
-
-
 def get_data_file():
     base_folder = os.path.dirname(__file__)
     return os.path.join(base_folder, 'data', 'RealEstateTransactions.csv')
 
 
+def load_file(file_name):
+    with open(file_name, 'r', encoding='utf-8') as fin:
+
+        reader = csv.DictReader(fin)
+        for row in reader:
+            print('Type: {} Row: {}'.format(type(row), row))
+            print('Beds #: {}'.format(row['Beds']))
+
+        # header = fin.readline().strip()
+        # reader = csv.reader(fin, delimiter=',')
+        # for row in reader:
+        #    print('Row: {}'.format(row))
+
+
+    return []
+
+
 def query_data(data):
+
+    # TODO: most expensive house
+    # TODO: Least expensive house
+    # TODO: Average house price
+    # TODO: Average house price of 2 bed houses
     pass
 
 
