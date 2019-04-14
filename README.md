@@ -1,4 +1,4 @@
 # 9-Realestate
-Using App for analysis of Real Estate data to learn Python
+Learning Python: Using Real Estate app to understand more about data aggregation and analysis
 
 TODO: detailed description
