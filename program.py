@@ -51,21 +51,21 @@ def load_file(file_name):
 
 def query_data(data):
 
-    data.sort(key= lambda p: p.Sale_price)
+    data.sort(key=lambda p: p.Sale_price)
 
-    # TODO: most expensive house
+    # most expensive house
     high_purchase = data[-1]    # LAST item in the list
     print('The most expensive property price is ${} with {} beds and {} baths'.format(
         high_purchase.Sale_price, high_purchase.Beds, high_purchase.Bathrooms
     ))
 
-    # TODO: Least expensive house
+    # Least expensive house
     low_purchase = data[0]     # FIRST item in the list
     print('The least expensive property price is ${} with {} beds and {} baths'.format(
         low_purchase.Sale_price, low_purchase.Beds, low_purchase.Bathrooms
     ))
 
-    # TODO: Average house price
+    # Average house price
     # prices = []
     # for pur in data:
     #    prices.append(pur.Sale_price)
@@ -79,24 +79,32 @@ def query_data(data):
     # ave_price = statistics.mean(prices)
     print('The average price of homes is {:,}'.format(int(ave_price)))
 
-    # TODO: Average house price of 2 bed houses
+    # Average house price of 2 bed houses
     # prices = []
     # for pur in data:
     #    if pur.Beds == 2:
     #        prices.append(pur.Sale_price)
 
-    two_bed_homes = [
+    two_bed_homes = (   # generator expressions "()"
         p               # projection or items
         for p in data   # the set to process
         if announce(p, '2 bedrooms, found {}'.format(p.Beds)) and p.Beds == 2  # test / condition
-    ]
+    )
+
+    homes = []
+    for h in two_bed_homes:
+        if len(homes) > 5:
+            break
+        homes.append(h)
 
     ave_price = 0
-    ave_price = statistics.mean(p.Sale_price for p in two_bed_homes)
-    ave_baths = statistics.mean(p.Bathrooms for p in two_bed_homes)
-    ave_squares = statistics.mean(p.Squares for p in two_bed_homes)
+    # ave_price = statistics.mean(announce[p.Sale_price, 'price') for p in homes]) with declarative statement "[]"
+    ave_price = statistics.mean(announce(p.Sale_price, 'price') for p in homes)   # with inline yield "()"
+    ave_baths = statistics.mean((p.Bathrooms for p in homes))
+    ave_squares = statistics.mean((p.Squares for p in homes))
     print('Two bedroom homes: average price {:,} baths {} squares {}'
           .format(int(ave_price), ave_baths, ave_squares))
+
 
 def announce(item, msg):
     print('Pulling item {} for {}'.format(item, msg))
@@ -105,3 +113,4 @@ def announce(item, msg):
 
 if __name__ == '__main__':
     main()
+
