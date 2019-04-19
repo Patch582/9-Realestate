@@ -55,34 +55,52 @@ def query_data(data):
 
     # TODO: most expensive house
     high_purchase = data[-1]    # LAST item in the list
-    print('The most expensive house price is ${} with {} beds and {} baths'.format(
+    print('The most expensive property price is ${} with {} beds and {} baths'.format(
         high_purchase.Sale_price, high_purchase.Beds, high_purchase.Bathrooms
     ))
 
     # TODO: Least expensive house
     low_purchase = data[0]     # FIRST item in the list
-    print('The least expensive house price is ${} with {} beds and {} baths'.format(
+    print('The least expensive property price is ${} with {} beds and {} baths'.format(
         low_purchase.Sale_price, low_purchase.Beds, low_purchase.Bathrooms
     ))
 
     # TODO: Average house price
-    prices = []
-    for pur in data:
-        prices.append(pur.Sale_price)
+    # prices = []
+    # for pur in data:
+    #    prices.append(pur.Sale_price)
+
+    prices = [
+        p.Sale_price    # projection or items
+        for p in data   # the set to process
+    ]
 
     ave_price = 0
     # ave_price = statistics.mean(prices)
     print('The average price of homes is {:,}'.format(int(ave_price)))
 
     # TODO: Average house price of 2 bed houses
-    prices = []
-    for pur in data:
-        if pur.Beds == 2:
-            prices.append(pur.Sale_price)
+    # prices = []
+    # for pur in data:
+    #    if pur.Beds == 2:
+    #        prices.append(pur.Sale_price)
+
+    two_bed_homes = [
+        p               # projection or items
+        for p in data   # the set to process
+        if announce(p, '2 bedrooms, found {}'.format(p.Beds)) and p.Beds == 2  # test / condition
+    ]
 
     ave_price = 0
-    # ave_price = statistics.mean(prices)
-    print('The average price of homes withe 2 beds is {:,}'.format(int(ave_price)))
+    ave_price = statistics.mean(p.Sale_price for p in two_bed_homes)
+    ave_baths = statistics.mean(p.Bathrooms for p in two_bed_homes)
+    ave_squares = statistics.mean(p.Squares for p in two_bed_homes)
+    print('Two bedroom homes: average price {:,} baths {} squares {}'
+          .format(int(ave_price), ave_baths, ave_squares))
+
+def announce(item, msg):
+    print('Pulling item {} for {}'.format(item, msg))
+    return item
 
 
 if __name__ == '__main__':
