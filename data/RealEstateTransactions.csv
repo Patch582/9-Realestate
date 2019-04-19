@@ -1,3 +1,4 @@
 ref,Address1,Address2,Suburb,Postcode,State,Type,Squares,Beds,Bathrooms,Toilets,Cars,Garage,Sale_price,Sale_date,Latitude,Longitude
 1,28 Highwood Dr,NA,Hillside,3037,Vic,Residential,44,4,2,3,3,2,525000,12042013,NA,NA
-2,19 Riverside Cr,NA,Springfield Lakes,4073,Qld,Residential,26,3,2,2,1,0,365000,21012016,NA,NA
+2,19 Riverside Cr,NA,Springfield Lakes,4073,Qld,Residential,26,2,2,2,1,0,365000,21012016,NA,NA
+3,42 James St,NA,Ipswich,4073,Qld,Commercial,20,2,1,2,2,1,120000,12032014,NA,NA
